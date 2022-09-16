@@ -1,6 +1,6 @@
 from turtle import Turtle
 
-START = [0, -20, -40]
+START = [(0 , 0), (-20, 0), (-40, 0)]
 MOVE_SPEED = 20
 UP = 90
 DOWN = 270
@@ -16,12 +16,7 @@ class Snake:
 
     def create_snake(self):
         for item in START:
-            turtle = Turtle()
-            turtle.penup()
-            turtle.color("white")
-            turtle.shape("square")
-            turtle.goto(item, 0)
-            self.turtle_list.append(turtle)
+            self.add_turtle(item)
 
     def move(self):
         for turtle in range(len(self.turtle_list) - 1, 0, -1):
@@ -46,3 +41,15 @@ class Snake:
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+
+    def add_turtle(self, position):
+        turtle = Turtle()
+        turtle.penup()
+        turtle.color("white")
+        turtle.shape("square")
+        turtle.goto(position)
+        self.turtle_list.append(turtle)
+
+    def grow(self):
+        self.add_turtle(self.turtle_list[-1].position())
